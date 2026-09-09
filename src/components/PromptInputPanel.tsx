@@ -100,7 +100,7 @@ export function PromptInputPanel({
           onChange={(e) => setPrompt(e.target.value)}
           disabled={status === 'running'}
           placeholder="Enter the system prompt to test against adversarial attacks..."
-          className="h-full min-h-[160px] w-full resize-none rounded-lg border border-violet-500/15 bg-[#0e0e18] p-4 font-mono text-sm leading-relaxed text-zinc-200 placeholder-zinc-600 outline-none transition-colors focus:border-violet-500/40 focus:ring-1 focus:ring-violet-500/20 disabled:opacity-50"
+          className="min-h-[220px] w-full resize-y rounded-lg border border-violet-500/15 bg-[#0e0e18] p-4 font-mono text-xs sm:text-sm leading-relaxed text-zinc-200 placeholder-zinc-600 outline-none transition-colors focus:border-violet-500/40 focus:ring-1 focus:ring-violet-500/20 disabled:opacity-50"
         />
       </div>
 

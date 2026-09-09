@@ -22,7 +22,7 @@ export function StatusBar({ status, results, progress, elapsed, onOpenGuide }: S
 
   return (
     <header className="border-b border-violet-500/10 bg-[#0c0c14]/80 backdrop-blur-sm">
-      <div className="flex items-center justify-between px-5 py-3">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 px-4 sm:px-6 py-3.5">
         {/* Logo */}
         <div className="flex items-center gap-3">
           <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-violet-600/20 ring-1 ring-violet-500/30">
@@ -39,7 +39,7 @@ export function StatusBar({ status, results, progress, elapsed, onOpenGuide }: S
         </div>
 
         {/* Stats */}
-        <div className="flex items-center gap-6">
+        <div className="flex flex-wrap items-center gap-3 sm:gap-6">
           <div className="flex items-center gap-2 text-xs text-zinc-400">
             <Target size={14} className="text-violet-400" />
             <span className="font-mono">{results.length} attempts</span>

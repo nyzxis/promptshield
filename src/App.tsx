@@ -32,40 +32,48 @@ export default function App() {
   }, [status]);
 
   return (
-    <div className="flex h-screen flex-col bg-[#0a0a0f] text-zinc-100 antialiased">
-      {/* Top Status Bar */}
-      <StatusBar
-        status={status}
-        results={results}
-        progress={progress}
-        elapsed={elapsed}
-        onOpenGuide={() => setIsGuideOpen(true)}
-      />
+    <div className="min-h-screen w-full bg-[#08080d] text-zinc-100 antialiased py-3 sm:py-8 px-3 sm:px-6 flex flex-col items-center justify-start selection:bg-violet-500/30 selection:text-white">
+      {/* Containerized Shell */}
+      <div className="w-full max-w-7xl mx-auto rounded-2xl border border-violet-500/20 bg-[#0c0c14]/95 shadow-2xl backdrop-blur-xl overflow-hidden flex flex-col">
+        {/* Top Status Bar */}
+        <StatusBar
+          status={status}
+          results={results}
+          progress={progress}
+          elapsed={elapsed}
+          onOpenGuide={() => setIsGuideOpen(true)}
+        />
 
-      {/* Main Content: Asymmetric Split */}
-      <div className="flex min-h-0 flex-1">
-        {/* Left Panel: Input + Controls (45%) */}
-        <div className="flex w-[45%] flex-col border-r border-violet-500/10">
-          <PromptInputPanel
-            status={status}
-            onStartFuzzing={startFuzzing}
-            onStop={stopFuzzing}
-            onReset={reset}
-          />
+        {/* Main Content: Responsive Split */}
+        <div className="flex flex-col lg:flex-row divide-y lg:divide-y-0 lg:divide-x divide-violet-500/10">
+          {/* Left Panel: Input + Controls */}
+          <div className="w-full lg:w-[45%] flex flex-col">
+            <PromptInputPanel
+              status={status}
+              onStartFuzzing={startFuzzing}
+              onStop={stopFuzzing}
+              onReset={reset}
+            />
+          </div>
+
+          {/* Right Panel: Results + Gauge */}
+          <div className="w-full lg:w-[55%] flex flex-col overflow-hidden">
+            <FuzzingResultsPanel
+              results={results}
+              status={status}
+              currentPattern={currentPattern}
+            />
+          </div>
         </div>
 
-        {/* Right Panel: Results + Gauge (55%) */}
-        <div className="flex w-[55%] flex-col overflow-hidden">
-          <FuzzingResultsPanel
-            results={results}
-            status={status}
-            currentPattern={currentPattern}
-          />
-        </div>
+        {/* Bottom: Vulnerability Report */}
+        <VulnerabilityReport results={results} />
       </div>
 
-      {/* Bottom: Vulnerability Report */}
-      <VulnerabilityReport results={results} />
+      {/* Footer Branding */}
+      <footer className="mt-6 text-center font-mono text-[11px] text-zinc-600">
+        PromptShield • AI Red-Teaming & Fuzzer • Built by <a href="https://nyzxis.vercel.app/" target="_blank" rel="noreferrer" className="text-violet-400/80 hover:text-violet-300">nyzxis</a>
+      </footer>
 
       {/* Instructional Guide Modal */}
       <GuideModal

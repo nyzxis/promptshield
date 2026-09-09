@@ -42,9 +42,9 @@ export function FuzzingResultsPanel({ results, status, currentPattern }: Fuzzing
   return (
     <div className="flex h-full flex-col p-5">
       {/* Gauge + Category Breakdown */}
-      <div className="mb-4 flex items-start gap-6">
+      <div className="mb-4 flex flex-col sm:flex-row items-center sm:items-start gap-6">
         <SeverityGauge results={results} />
-        <div className="flex flex-1 flex-col gap-2 pt-2">
+        <div className="flex w-full flex-1 flex-col gap-2 pt-2">
           <p className="mb-1 font-mono text-[10px] tracking-wider text-zinc-500">
             CATEGORY BREAKDOWN
           </p>
