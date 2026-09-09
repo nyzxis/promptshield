@@ -1,4 +1,4 @@
-import { Shield, Lightning, Clock, Target } from '@phosphor-icons/react';
+import { Shield, Lightning, Clock, Target, Question } from '@phosphor-icons/react';
 import type { FuzzingStatus } from '../hooks/useFuzzingEngine';
 import type { FuzzResult } from '../data/attackPatterns';
 
@@ -7,9 +7,10 @@ interface StatusBarProps {
   results: FuzzResult[];
   progress: number;
   elapsed: number;
+  onOpenGuide: () => void;
 }
 
-export function StatusBar({ status, results, progress, elapsed }: StatusBarProps) {
+export function StatusBar({ status, results, progress, elapsed, onOpenGuide }: StatusBarProps) {
   const bypassed = results.filter((r) => r.success).length;
   const blocked = results.filter((r) => !r.success).length;
 
@@ -76,6 +77,15 @@ export function StatusBar({ status, results, progress, elapsed }: StatusBarProps
             {status.toUpperCase()}
             {status === 'running' && ` ${progress}%`}
           </div>
+
+          {/* Guide Button */}
+          <button
+            onClick={onOpenGuide}
+            className="flex items-center gap-1.5 rounded-lg border border-violet-500/20 bg-violet-500/10 px-2.5 py-1 font-mono text-xs font-semibold text-violet-300 hover:bg-violet-500/20 hover:text-white transition-colors"
+          >
+            <Question size={14} weight="bold" />
+            <span>How to Use</span>
+          </button>
         </div>
       </div>
 

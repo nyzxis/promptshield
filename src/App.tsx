@@ -3,6 +3,7 @@ import { StatusBar } from './components/StatusBar';
 import { PromptInputPanel } from './components/PromptInputPanel';
 import { FuzzingResultsPanel } from './components/FuzzingResultsPanel';
 import { VulnerabilityReport } from './components/VulnerabilityReport';
+import { GuideModal } from './components/GuideModal';
 import { useFuzzingEngine } from './hooks/useFuzzingEngine';
 
 export default function App() {
@@ -10,6 +11,7 @@ export default function App() {
     useFuzzingEngine();
 
   const [elapsed, setElapsed] = useState(0);
+  const [isGuideOpen, setIsGuideOpen] = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
@@ -32,7 +34,13 @@ export default function App() {
   return (
     <div className="flex h-screen flex-col bg-[#0a0a0f] text-zinc-100 antialiased">
       {/* Top Status Bar */}
-      <StatusBar status={status} results={results} progress={progress} elapsed={elapsed} />
+      <StatusBar
+        status={status}
+        results={results}
+        progress={progress}
+        elapsed={elapsed}
+        onOpenGuide={() => setIsGuideOpen(true)}
+      />
 
       {/* Main Content: Asymmetric Split */}
       <div className="flex min-h-0 flex-1">
@@ -58,6 +66,12 @@ export default function App() {
 
       {/* Bottom: Vulnerability Report */}
       <VulnerabilityReport results={results} />
+
+      {/* Instructional Guide Modal */}
+      <GuideModal
+        isOpen={isGuideOpen}
+        onClose={() => setIsGuideOpen(false)}
+      />
     </div>
   );
 }
